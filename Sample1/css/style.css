@@ -1,0 +1,29 @@
+﻿html,
+body,
+.full {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	padding-top: 50px;
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+
+.sidebar {
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+}
+
+.sidebar.static {
+	position: static;
+}
+
+.sidebar.right {
+	right: 0;
+}

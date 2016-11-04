@@ -22,11 +22,11 @@
                 children: Ember.A([]),
                 width: this.width,
                 height: this.height,
-                addState: function (state) {
+                addChildState: function (state) {
                     this.children.addObject(state);
                     this.resize();
                 },
-                removeState: function (state) {
+                removeChildState: function (state) {
                     this.children.removeObject(state);
                     this.resize();
                 },
@@ -47,18 +47,18 @@
                 state = get(this, 'stateObject');
 
             state.setProperties({
-                name: this.viewName || this.renderedName,
+                key: this.viewName || this.renderedName,
                 _onResize: function () { self._onResize(); }
             });
 
-            parentState.addState(state);
+            parentState.addChildState(state);
         }),
 
         _teardown: on('willDestroyElement', function () {
             var parentState = get(this, 'parentView.stateObject'),
                  state = get(this, 'stateObject');
 
-            parentState.removeState(state);
+            parentState.removeChildState(state);
         }),
 
         _onResize: function () {
@@ -108,7 +108,7 @@
             var parentState = get(this, 'parentView.stateObject'),
                 children = get(parentState, 'children'),
                 state = get(this, 'stateObject'),
-                childrenWidth = children.filter(function (child) { return get(child, 'name') !== get(state, 'name'); })
+                childrenWidth = children.filter(function (child) { return get(child, 'key') !== get(state, 'key'); })
                     .reduce(function (a, b) {
                         return a + get(b, 'width');
                     }, 0),
